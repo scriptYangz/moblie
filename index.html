@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<!-- 引入样式 -->
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+		<link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+		<style type="text/css">
+			body,
+			html {
+				margin: 0;
+				padding: 0;
+				font-size: 36px;
+			}
+			
+			p {
+				margin: 0;
+				padding: 0;
+			}
+			
+			#app {
+				background-color: #f5f5f5;
+			}
+			
+			.content {
+				background-color: white!important;
+				margin-bottom: .25rem!important;
+			}
+		</style>
+		<style type="text/css">
+			.el-header {
+				position: fixed;
+				background-color: white;
+				border-bottom: #f0f0f0 1px solid;
+				padding: 0;
+				width: 100%;
+				z-index: 30;
+			}
+			
+			.logo {
+				display: block;
+				position: absolute;
+				width: 110px;
+				height: 31px;
+				left: 10px;
+				top: 12px;
+			}
+			
+			.dl {
+				display: block;
+				position: absolute;
+				left: 131px;
+				top: 18px;
+				text-align: center;
+				width: 60px;
+				height: 20px;
+				font: 12px/20px "微软雅黑";
+				color: #68c04a;
+				border: 1px solid #68c04a;
+				border-radius: 10px;
+			}
+			
+			.search {
+				display: block;
+				height: 24px;
+				width: 24px;
+				position: absolute;
+				top: 18px;
+				right: 54px;
+			}
+			
+			.person {
+				display: block;
+				height: 28px;
+				width: 28px;
+				position: absolute;
+				right: 10px;
+				top: 14px;
+			}
+			
+			.el-header img {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			
+			.banner {
+				width: 100%;
+				height: 3.125rem;
+				background-color: blue;
+			}
+			
+			.banner img {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.mint-swipe-indicators {
+				bottom: 0px;
+			}
+			
+			.el-main {
+				padding: 60px 0;
+				padding-bottom: 10px;
+			}
+			
+			.el-row {
+				padding-bottom: 20px;
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+			
+			.el-col {
+				text-align: center;
+				font-size: 0.3125rem;
+			}
+			
+			.course .el-col {
+				width: 20%;
+			}
+			
+			.grid-content {
+				border-radius: 4px;
+				min-height: 36px;
+			}
+			
+			.course img {
+				display: block;
+				width: 1.85166875rem;
+				height: 1.5233749999999998rem;
+				border-radius: 10px;
+				margin: 0 auto;
+				margin-top: 0.5rem;
+				margin-bottom: 0.2rem;
+			}
+			
+			
+			.ad a {
+				display: block;
+				width: 10rem;
+				height: 3.333rem;
+			}
+			
+			.ad img {
+				height: 100%;
+				width: 100%;
+			}
+			
+			.recommend img {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+			}
+			
+			.activity {
+				padding: .4rem .4rem .5rem .4rem;
+			}
+			
+			.activity-left,
+			.activity-right {
+				width: 4.46rem;
+			}
+			
+			.activity img {
+				height: 100%;
+				width: 100%;
+			}
+			
+			.activity-left {
+				height: 3.94667rem;
+			}
+			
+			.activity-right {
+				float: right;
+				height: 1.86667rem;
+				margin-bottom: .1rem;
+			}
+			
+			.head {
+				overflow: hidden;
+				padding-right: .3125rem;
+				line-height: .9062499999999999rem;
+				border-top: 1px solid #68c04a;
+				font-size: .43749999999999994rem;
+				position: relative;
+			}
+			
+			.head .left {
+				height: .9062499999999999rem;
+				float: left;
+				color: #fff;
+				background: #68c04a;
+				width: 2.34375rem;
+				text-align: center;
+				position: relative;
+				z-index: 0;
+			}
+			
+			.head .left:after {
+				position: absolute;
+				z-index: -1;
+				width: 0;
+				height: 0;
+				font-size: 0;
+				right: -.3125rem;
+				top: 0;
+				content: "";
+				border: .9062499999999999rem solid;
+				border-width: 1.5625rem .46875rem 0;
+
+			}
+			
+			.more {
+				position: absolute;
+				right: .3rem;
+				
+			}
+			
+			.cou,
+			.textgu {
+				padding-bottom: 0;
+			}
+			
+			.cou .el-col {
+				border-bottom: 1px solid #ececec;
+				position: relative;
+			}
+			
+			.cou .el-col:nth-child(odd):after {
+				content: "";
+				position: absolute;
+				border-right: 1px solid #ececec;
+				height: 1rem;
+				top: 50%;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+				z-index: 5;
+			}
+			
+			.textgu {
+				text-align: center;
+				border-bottom: 1px solid #ececec;
+				line-height: 1.21875rem;
+				font-size: .37499999999999994rem;
+				text-align: center;
+				color: #999;
+			}
+			
+			.textgu .el-col a:after {
+				content: "";
+				position: absolute;
+				right: 0;
+				border-right: 1px solid #ececec;
+				height: .5rem;
+				top: 50%;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+				z-index: 5;
+			}
+			
+			.textgu a {
+				position: relative;
+				display: block;
+				width: 100%;
+				height: 100%;
+			}
+			
+			.bottomimg {
+				height: 2.15rem;
+				width: 100%;
+			}
+			
+			.bottomimg img {
+				height: 100%;
+				width: 100%;
+			}
+			
+			
+			.special .head{
+				border: none;
+				text-align: center;
+				color: #68c04a;
+				padding: .3rem 0;
+			}
+			.special a{
+				display: block;
+				float: left;
+				width: 100%;
+				height: 100%;
+				margin-bottom: .5rem;
+			}
+			.special .el-row{
+				margin-bottom: 0;
+				padding-bottom: 0;
+			}
+			/*课程块*/
+			
+			.english .head{
+				border-top: #68c04a solid 1px;
+				color: #68c04a;
+			}
+			.english .head .left {
+				background-color: #68c04a;
+			}
+			.english .head .left:after{
+				border-color: #68c04a transparent;
+			}
+			.japanese .head{
+				border-top: #68b6f3 solid 1px;
+				color: #68b6f3;
+			}
+			.japanese .head .left {
+				background-color: #68b6f3;
+			}
+			.japanese .head .left:after{
+				border-color: #68b6f3 transparent;
+			}
+			.abroad .head{
+				border-top: #fdb657 solid 1px;
+				color: #fdb657;
+			}
+			.abroad .head .left {
+				background-color: #fdb657;
+			}
+			.abroad .head .left:after{
+				border-color: #fdb657 transparent;
+			}
+			.moreclass .head{
+				border-top: #4db6ac solid 1px;
+				color: #4db6ac;
+			}
+			.moreclass .head .left {
+				background-color: #4db6ac;
+			}
+			.moreclass .head .left:after{
+				border-color: #4db6ac transparent;
+			}
+			.pubmed .head{
+				border-top: #d179b8 solid 1px;
+				color: #d179b8;
+			}
+			.pubmed .head .left {
+				background-color: #d179b8;
+			}
+			.pubmed .head .left:after{
+				border-color: #d179b8 transparent;
+			}
+			.interest .head{
+				border-top: #68c04a solid 1px;
+				color: #68c04a;
+			}
+			.interest .head .left {
+				background-color: #68c04a;
+			}
+			.interest .head .left:after{
+				border-color: #68c04a transparent;
+			}
+			.banking .head{
+				border-top: #fdb657 solid 1px;
+				color: #fdb657;
+			}
+			.banking .head .left {
+				background-color: #fdb657;
+			}
+			.banking .head .left:after{
+				border-color: #fdb657 transparent;
+			}
+			.child .head{
+				border-top: #fc7678 solid 1px;
+				color: #fc7678;
+			}
+			.child .head .left {
+				background-color: #fc7678;
+			}
+			.child .head .left:after{
+				border-color: #fc7678 transparent;
+			}
+			
+			/*脚部*/
+			
+			.el-footer {
+				width: 100%;
+				text-align: center;
+				font-size: 12px;
+				color: #aaaaaa;
+			}
+			
+			.advice {
+				color: #666666;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div id="app">
+			<el-header>
+				<a class="logo"><img src="img/1528425342(1).png" /></a>
+				<a class="dl">下载App</a>
+				<a class="search"><img src="img/1528425927(1).png" /></a>
+				<a class="person"><img src="img/1528425951(1).png" /></a>
+			</el-header>
+			<el-main>
+				<mt-swipe :auto="4000" class="banner">
+					<mt-swipe-item><img src="img/28ae745b7c011cc4d6487faf5991397e.jpg" /></mt-swipe-item>
+					<mt-swipe-item><img src="img/98bfe6be8537ca3859edfd0765859a8a.jpg" /></mt-swipe-item>
+					<mt-swipe-item><img src="img/ee4e3a335e73eadacac5f41bd1fbff99.jpg" /></mt-swipe-item>
+					<mt-swipe-item><img src="img/c5528bc60122438332da1bbca784f380.jpg" /></mt-swipe-item>
+					<mt-swipe-item><img src="img/96eaf148a4a56487ded0e9a8c18b104e.jpg" /></mt-swipe-item>
+					<mt-swipe-item><img src="img/61464260e781e296eae104a791047a0b.jpg" /></mt-swipe-item>
+				</mt-swipe>
+				<el-row class="content course">
+					<el-col :span="4">
+						<div class="grid-content"><img src="img/df403832bb2e5ab143d01a455b514e63.png" /><span>英语</span></div>
+					</el-col>
+					<el-col :span="4">
+						<div class="grid-content"><img src="img/f8df2b790018a7a2821c88530fa3cc95.png" /><span>英语口语</span></div>
+					</el-col>
+					<el-col :span="4">
+						<div class="grid-content"><img src="img/92b3f7c0590b72cada706d6eca8468d6.png" /><span>日语</span></div>
+					</el-col>
+					<el-col :span="4">
+						<div class="grid-content"><img src="img/5a4cc9becc04adcb15a1e3d2eb191c5f.png" /><span>韩语</span></div>
+					</el-col>
+					<el-col :span="4">
+						<div class="grid-content"><img src="img/a9867a67a14ba83ba1a6fecbedc553d3.png" /><span>小语种</span></div>
+					</el-col>
+					<el-col :span="4">
+						<div class="grid-content"><img src="img/92b3f7c0590b72cada706d6eca8468d6.png" /><span>中小幼</span></div>
+					</el-col>
+					<el-col :span="4">
+						<div class="grid-content"><img src="img/71d32488bb48963648fb546c4c30a167.png" /><span>托福雅思</span></div>
+					</el-col>
+					<el-col :span="4">
+						<div class="grid-content"><img src="img/9afec2530af69ef06d237c14ca911156.png" /><span>考研</span></div>
+					</el-col>
+					<el-col :span="4">
+						<div class="grid-content"><img src="img/9222e64b7763d50b4e30bae7d881f585.png" /><span>职业技能</span></div>
+					</el-col>
+					<el-col :span="4">
+						<div class="grid-content"><img src="img/e0b49df1ab80bd7f6bca3ab89eae239b.png" /><span>全部分类</span></div>
+					</el-col>
+				</el-row>
+
+				<div class="ad content">
+					<a href="#"><img src="img/1528426802(1).png" /></a>
+				</div>
+
+				<el-row class="content recommend">
+					<el-col :span="12">
+						<div class="grid-content"><img src="img/1528427902(1).png" /></div>
+					</el-col>
+					<el-col :span="12">
+						<div class="grid-content"><img src="img/1528427934(1).png" /></div>
+					</el-col>
+					<el-col :span="12">
+						<div class="grid-content"><img src="img/1528427966(1).png" /></div>
+					</el-col>
+					<el-col :span="12">
+						<div class="grid-content"><img src="img/1528427984(1).png" /></div>
+					</el-col>
+				</el-row>
+				<el-row class="content activity">
+					<el-col :span="12" class="activity-left">
+						<img src="img/1528428278(1).png" />
+					</el-col>
+					<el-col :span="12" class="activity-right">
+						<div class=""><img src="img/1528428292(1).png" /></div>
+					</el-col>
+					<el-col :span="12" class="activity-right">
+						<div class=""><img src="img/1528428313(1).png" /></div>
+					</el-col>
+				</el-row>
+
+				<div class="content english">
+					<div class="head">
+						<div class="left">
+							英语课程
+						</div>
+						<div class="more">
+							<a>更多 <i>></i></a>
+						</div>
+					</div>
+					<el-row class=" cou">
+						<el-col :span="12">
+							<img src="img/1528439913(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528439965(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528431652(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528440017(1).png" />
+						</el-col>
+					</el-row>
+					<el-row class=" textgu">
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+					</el-row>
+					<div class="bottomimg">
+						<img src="img/30ca1c6e1733a3841174b8553176efda.jpg" />
+					</div>
+				</div>
+				<div class="content japanese">
+					<div class="head">
+						<div class="left">
+							日语课程
+						</div>
+						<div class="more">
+							<a>更多 <i>></i></a>
+						</div>
+					</div>
+					<el-row class=" cou">
+						<el-col :span="12">
+							<img src="img/1528439913(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528439965(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528431652(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528440017(1).png" />
+						</el-col>
+					</el-row>
+					<el-row class=" textgu">
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+					</el-row>
+					<div class="bottomimg">
+						<img src="img/3a17d64b3f8bbd6cc6e8c80aac7c6755.jpg" />
+					</div>
+				</div>
+				<div class="content abroad">
+					<div class="head">
+						<div class="left">
+							留学课程
+						</div>
+						<div class="more">
+							<a>更多 <i>></i></a>
+						</div>
+					</div>
+					<el-row class=" cou">
+						<el-col :span="12">
+							<img src="img/1528439913(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528439965(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528431652(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528440017(1).png" />
+						</el-col>
+					</el-row>
+					<el-row class=" textgu">
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+					</el-row>
+					<div class="bottomimg">
+						<img src="img/676249df3cf2426464942319f1a6f7eb.jpg" />
+					</div>
+				</div>
+				<div class="content moreclass">
+					<div class="head">
+						<div class="left">
+							更多语言课程
+						</div>
+						<div class="more">
+							<a>更多 <i>></i></a>
+						</div>
+					</div>
+					<el-row class=" cou">
+						<el-col :span="12">
+							<img src="img/1528439913(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528439965(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528431652(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528440017(1).png" />
+						</el-col>
+					</el-row>
+					<el-row class=" textgu">
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+					</el-row>
+				</div>
+				<div class="content pubmed">
+					<div class="head">
+						<div class="left">
+							考研课程
+						</div>
+						<div class="more">
+							<a>更多 <i>></i></a>
+						</div>
+					</div>
+					<el-row class=" cou">
+						<el-col :span="12">
+							<img src="img/1528439913(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528439965(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528431652(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528440017(1).png" />
+						</el-col>
+					</el-row>
+					<el-row class=" textgu">
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+					</el-row>
+					<div class="bottomimg">
+						<img src="img/33b41a4dfc114c60eee067afd6656a6f.gif" />
+					</div>
+				</div>
+				<div class="content interest">
+					<div class="head">
+						<div class="left">
+							职场兴趣
+						</div>
+						<div class="more">
+							<a>更多 <i>></i></a>
+						</div>
+					</div>
+					<el-row class=" cou">
+						<el-col :span="12">
+							<img src="img/1528439913(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528439965(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528431652(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528440017(1).png" />
+						</el-col>
+					</el-row>
+					<el-row class=" textgu">
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+					</el-row>
+					<div class="bottomimg">
+						<img src="img/676249df3cf2426464942319f1a6f7eb.jpg" />
+					</div>
+				</div>
+				<div class="content banking ">
+					<div class="head">
+						<div class="left">
+							财汇金融
+						</div>
+						<div class="more">
+							<a>更多 <i>></i></a>
+						</div>
+					</div>
+					<el-row class=" cou">
+						<el-col :span="12">
+							<img src="img/1528439913(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528439965(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528431652(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528440017(1).png" />
+						</el-col>
+					</el-row>
+					<el-row class=" textgu">
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+					</el-row>
+					<div class="bottomimg">
+						<img src="img/99f8f08925c2589877edc7c54d23d059.jpg" />
+					</div>
+				</div>
+				<div class="content child ">
+					<div class="head">
+						<div class="left">
+							中小幼教育
+						</div>
+						<div class="more">
+							<a>更多 <i>></i></a>
+						</div>
+					</div>
+					<el-row class=" cou">
+						<el-col :span="12">
+							<img src="img/1528439913(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528439965(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528431652(1).png" />
+						</el-col>
+						<el-col :span="12">
+							<img src="img/1528440017(1).png" />
+						</el-col>
+					</el-row>
+					<el-row class=" textgu">
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+						<el-col :span="6">
+							<a>外教1对1</a>
+						</el-col>
+					</el-row>
+					<div class="bottomimg">
+						<img src="img/b13ab9eb386bd9f702eb3f9c41597d66.jpg" />
+					</div>
+				</div>
+				
+				
+				<div class="content special">
+					<div class="head">
+						● 网校特色 ●
+					</div>
+					<el-row class="">
+						<el-col :span="6">
+							<a><img src="img/1528436676(1).png"/><div>笔记</div></a>
+						</el-col>
+						<el-col :span="6">
+							<a><img src="img/1528436676(1).png"/><div>笔记</div></a>
+						</el-col>
+						<el-col :span="6">
+							<a><img src="img/1528436676(1).png"/><div>笔记</div></a>
+						</el-col>
+						<el-col :span="6">
+							<a><img src="img/1528436676(1).png"/><div>笔记</div></a>
+						</el-col>
+						<el-col :span="6">
+							<a><img src="img/1528436676(1).png"/><div>笔记</div></a>
+						</el-col>
+						<el-col :span="6">
+							<a><img src="img/1528436676(1).png"/><div>笔记</div></a>
+						</el-col>
+						<el-col :span="6">
+							<a><img src="img/1528436676(1).png"/><div>笔记</div></a>
+						</el-col>
+						<el-col :span="6">
+							<a><img src="img/1528436676(1).png"/><div>笔记</div></a>
+						</el-col>
+					</el-row>
+				</div>
+
+			</el-main>
+			<el-footer class="">
+				<p>沪江教育科技（上海）股份有限公司</p>
+				<p>内容举报热线 4008220220</p>
+				<p>联系电话：021-61125678
+					<a class="advice">意见反馈</a>
+				</p>
+			</el-footer>
+		</div>
+	</body>
+	<!-- import Vue before Element -->
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<!-- 引入组件库 -->
+	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+	<script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data: function() {
+				return {
+					visible: false
+				}
+			}
+		})
+	</script>
+
+</html>
